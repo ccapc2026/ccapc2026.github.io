@@ -1,272 +1,202 @@
 import Image from 'next/image';
-import { Box, BoxGrid } from '@/components/ui';
 import { contest, divisions, rules, schedule, scheduleNote, site, team } from '@/data/site';
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <Boxes />
+      <About />
+      <Schedule />
+      <Rules />
+      <Prizes />
+      <Team />
     </>
   );
 }
 
-/**
- * Title card on the left, guide on the right. The card is translucent and
- * lifted off the black with a ring and a shadow, so it reads as raised even
- * before the animated curve lands behind it.
- */
 function Hero() {
   return (
-    <section className="relative px-5 py-20 sm:px-10 sm:py-28 lg:px-14">
-      <div className="mx-auto grid max-w-[88rem] items-stretch gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
-        <div className="glass p-10 shadow-2xl shadow-black/60 ring-1 ring-white/5 sm:p-16">
-          {/* Black artwork needs a light ground, so it gets a panel of its own. */}
-          <div className="mb-10 inline-flex rounded-2xl bg-white p-5 sm:p-6">
-            <Image
-              src="/ccapc-logo.webp"
-              alt="CCAPC"
-              width={756}
-              height={756}
-              priority
-              className="h-24 w-auto sm:h-28"
-            />
-          </div>
+    <section id="top" className="hero-weave relative overflow-hidden bg-cca-deep py-20 text-center text-white">
+      <div className="wrap relative">
+        <span className="mb-7 inline-flex rounded-2xl bg-white p-4">
+          <Image src="/ccapc-logo.webp" alt="CCAPC" width={756} height={756} priority className="h-[72px] w-auto" />
+        </span>
 
-          <h1 className="text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl">{site.title}</h1>
-          <p className="mt-5 text-xl font-medium text-white/80 sm:text-2xl">{site.subtitle}</p>
+        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+          Canyon Crest Academy
+          <br />
+          Programming Contest
+        </h1>
 
-          <ul className="mt-12 space-y-7">
-            {contest.highlights.map((h) => (
-              <li key={h} className="flex items-start gap-4">
-                <Check />
-                <span className="text-base leading-relaxed text-white/70 sm:text-lg">{h}</span>
-              </li>
-            ))}
-          </ul>
+        <p className="mt-5 font-mono text-sm text-white/85">
+          {contest.date} &nbsp;·&nbsp; {contest.venue}, San Diego
+        </p>
+        <p className="mt-3 text-lg text-white/95">
+          A 3.5-hour team contest on {contest.platform}. Two divisions, 12 problems each.
+        </p>
+
+        <div className="mt-9 flex flex-wrap justify-center gap-3">
+          {contest.guideUrl && (
+            <a
+              href={contest.guideUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-lg border border-white bg-white px-6 py-2.5 text-sm font-semibold text-cca-deep transition-transform hover:-translate-y-0.5"
+            >
+              Contest Guide
+            </a>
+          )}
+          <a
+            href={contest.discordUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-lg border border-white/55 px-6 py-2.5 text-sm font-semibold transition-transform hover:-translate-y-0.5 hover:border-white"
+          >
+            Join Discord
+          </a>
         </div>
 
-        <GuideCard />
+        <p className="mt-5 font-mono text-xs text-white/70">
+          {contest.codeforcesGroupUrl
+            ? 'Codeforces group is open — join before the contest starts.'
+            : 'Codeforces group link will be posted closer to the contest'}
+        </p>
       </div>
     </section>
   );
 }
 
-function Check() {
+function About() {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden
-      className="mt-1 h-5 w-5 shrink-0 text-white/70"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M4 12.5l5.5 5.5L20 6" />
-    </svg>
-  );
-}
-
-function GuideCard() {
-  const enabled = Boolean(contest.guideUrl);
-
-  /* A circle wants a short label, so the explanation sits outside it. */
-  const circle = (
-    <span
-      className={`grid aspect-square w-52 place-items-center rounded-full text-center transition-transform ${
-        enabled
-          ? 'bg-cca-red text-white shadow-lg shadow-cca-red/25 hover:scale-[1.04]'
-          : 'cursor-not-allowed border border-dashed border-white/20 text-white/30'
-      }`}
-    >
-      <span className="px-4">
-        <span className="block text-sm font-semibold leading-tight">Contest guide</span>
-        <span className={`mt-1 block font-mono text-[10px] uppercase tracking-[0.14em] ${enabled ? 'text-white/70' : 'text-white/25'}`}>
-          {enabled ? 'Download' : 'Coming soon'}
-        </span>
-      </span>
-    </span>
-  );
-
-  return (
-    <aside className="glass flex flex-col items-center justify-center p-9 text-center sm:p-10 shadow-2xl shadow-black/60 ring-1 ring-white/5">
-      {enabled ? (
-        <a href={contest.guideUrl!} target="_blank" rel="noreferrer" className="rounded-full">
-          {circle}
-        </a>
-      ) : (
-        <span aria-disabled="true">{circle}</span>
-      )}
-
-      <p className="mt-8 text-sm leading-relaxed text-white/50">
-        Everything you need to know before contest day — format, what to bring, and how the judge works.
-      </p>
-
-      <div className="mt-8 w-full border-t border-white/10 pt-8">
-        <a
-          href={contest.discordUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="flex w-full items-center justify-center gap-2.5 rounded-xl bg-white px-5 py-3.5 text-sm font-semibold text-black transition-transform hover:-translate-y-0.5 hover:bg-white/90"
-        >
-          <ChatGlyph />
-          Join the Discord
-        </a>
-        <p className="mt-3 text-center text-xs leading-relaxed text-white/45">
-          Announcements, questions, and the Codeforces group link when it goes out.
+    <section id="about" className="py-20">
+      <div className="wrap">
+        <h2 className="section-title">About {site.name}</h2>
+        <p className="lede">
+          {contest.difficulty} {contest.accessibility}
         </p>
-      </div>
-    </aside>
-  );
-}
 
-/**
- * The tiled box layout: divisions paired across the top, contest details full
- * width beneath them, then schedule and prizes paired again.
- */
-function ChatGlyph() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden
-      className="h-4 w-4"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z" />
-    </svg>
-  );
-}
+        <div className="mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <article className="card">
+            <span className="font-mono text-lg font-bold text-cca-red">&lt;/&gt;</span>
+            <h3 className="mt-3 font-semibold">Format</h3>
+            <p className="mt-2 text-sm text-ink-soft">
+              3.5 hours, teams of up to 3, hosted in a private {contest.platform} group. 12 problems per division,
+              weighted equally, ranked by penalty.
+            </p>
+          </article>
 
-function Boxes() {
-  return (
-    <BoxGrid className="pb-32">
-      <div className="grid gap-8 sm:gap-10 lg:grid-cols-2">
-        {divisions.map((d) => (
-          <Box key={d.name} eyebrow="Division" title={d.name}>
-            <p className="text-white">{d.blurb}</p>
-            <p className="mt-3 text-sm text-white/40">{d.range}</p>
-          </Box>
-        ))}
-      </div>
-
-      <Box id="details" eyebrow="Contest" title="Details">
-        <dl className="divide-y divide-white/10">
-          {(
-            [
-              ['Date', contest.date],
-              ['Venue', `${contest.venue} — ${contest.address}`],
-              ['Format', contest.format],
-              ['Platform', contest.platform],
-              ['Languages', contest.languages.join(', ')],
-              ['Divisions', divisions.map((d) => d.name).join(' \u00b7 ')],
-              ['Teams', 'Up to 3 people'],
-              ['Community', 'Discord'],
-              ['Problems', '12 per division'],
-            ] as [string, string][]
-          ).map(([label, value], i) => (
-            <div key={label} className={`flex flex-wrap gap-x-10 gap-y-1 py-4 ${i === 0 ? 'pt-0' : ''}`}>
-              <dt className="w-32 shrink-0 font-mono text-[11px] uppercase tracking-[0.15em] text-white/35">
-                {label}
-              </dt>
-              <dd className="text-white">
-                {label === 'Community' ? (
-                  <a
-                    href={contest.discordUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="underline decoration-white/30 underline-offset-4 transition-colors hover:decoration-white"
-                  >
-                    {value}
-                  </a>
-                ) : (
-                  value
-                )}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </Box>
-
-      <Box id="rules" eyebrow="Before you compete" title="Rules">
-        {/* Multi-column flow rather than a grid: rows in a 2-col grid size to
-            their tallest item, which left ragged gaps between rules. */}
-        <ul className="sm:columns-2 sm:gap-x-12">
-          {rules.map((r) => (
-            <li key={r} className="mb-3 flex break-inside-avoid gap-3 text-white/70">
-              <span aria-hidden className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-white/30" />
-              <span className="leading-relaxed">{r}</span>
-            </li>
-          ))}
-        </ul>
-      </Box>
-
-      <div className="grid gap-8 sm:gap-10 lg:grid-cols-2">
-        <Box id="schedule" eyebrow="Contest day" title="Schedule">
-          <p className="mb-6 text-sm text-white/40">Tentative · all times Pacific</p>
-          <table className="w-full border-collapse text-left">
-            <tbody>
-              {schedule.map((row) => (
-                <tr key={row.time} className="border-b border-white/10 last:border-0">
-                  <td className="py-3 pr-6 align-top font-mono text-sm whitespace-nowrap text-white/60">
-                    {row.time}
-                  </td>
-                  <td className="py-3 align-top text-white">{row.event}</td>
-                </tr>
+          <article className="card">
+            <span className="font-mono text-lg font-bold text-cca-red">2×</span>
+            <h3 className="mt-3 font-semibold">Two Divisions</h3>
+            <ul className="mt-2 space-y-1.5 text-sm text-ink-soft">
+              {divisions.map((d) => (
+                <li key={d.name}>
+                  <span className="font-semibold text-ink">{d.name}:</span> {d.range.replace(/^Recommended for /, '')}
+                </li>
               ))}
-            </tbody>
-          </table>
-          <p className="mt-6 text-sm text-white/50">{scheduleNote}</p>
-          <p className="mt-3 text-sm text-white/40">
-            The Codeforces group link will be posted closer to the contest. Join the{' '}
-            <a
-              href={contest.discordUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="text-white/70 underline underline-offset-4 hover:text-white"
-            >
-              Discord
-            </a>{' '}
-            for questions and announcements.
-          </p>
-        </Box>
-        <Box id="prizes" eyebrow="Awards" title="Prizes">
-          <Tbd>Prize details will be announced closer to the contest.</Tbd>
-        </Box>
+            </ul>
+          </article>
+
+          <article className="card">
+            <span className="font-mono text-lg font-bold text-cca-red">{'{ }'}</span>
+            <h3 className="mt-3 font-semibold">Languages</h3>
+            <p className="mt-2 text-sm text-ink-soft">
+              {contest.languages.join(', ')}. Pre-written templates are allowed, and internet access is permitted
+              during the round.
+            </p>
+          </article>
+        </div>
       </div>
-      <Box id="team" eyebrow="Organizers" title="The Team">
-        <p className="mb-8 max-w-2xl leading-relaxed text-white/50">
-          CCAPC is written and run by students at Canyon Crest Academy.
-        </p>
-        <ul className="space-y-4">
-          {team.map((m) => (
-            <li key={m.name} className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <span className="font-semibold text-white">{m.name}</span>
-              <span aria-hidden className="text-white/20">
-                |
-              </span>
-              <span className="italic text-white/55">{m.roles.join(', ')}</span>
-            </li>
-          ))}
-        </ul>
-      </Box>
-    </BoxGrid>
+    </section>
   );
 }
 
-/** Shared empty state, so an unfinished section reads as intentional. */
-function Tbd({ children }: { children: React.ReactNode }) {
+function Schedule() {
   return (
-    <div className="flex flex-col items-start gap-4">
-      <span className="rounded-md border border-white/15 px-2.5 py-1 font-mono text-xs uppercase tracking-[0.15em] text-white/50">
-        TBD
-      </span>
-      <p className="text-white/50">{children}</p>
-    </div>
+    <section id="schedule" className="bg-band py-20">
+      <div className="wrap">
+        <h2 className="section-title">Schedule</h2>
+
+        <div className="mx-auto mt-11 max-w-xl rounded-xl border border-rule bg-white p-7">
+          <h3 className="font-semibold text-cca-deep">Contest Day</h3>
+          <p className="mt-1 font-mono text-xs text-ink-soft">Tentative · all times Pacific</p>
+
+          <ol className="mt-6">
+            {schedule.map((row) => (
+              <li key={row.time} className="grid grid-cols-[7.5rem_auto_1fr] items-start gap-3 py-2.5 sm:grid-cols-[9rem_auto_1fr]">
+                <span className="text-right font-mono text-[13px] text-ink-soft">{row.time}</span>
+                <span aria-hidden className="mt-2 h-2 w-2 rounded-full bg-cca-red" />
+                <span className="text-sm font-semibold">{row.event}</span>
+              </li>
+            ))}
+          </ol>
+
+          <p className="mt-6 text-sm text-ink-soft">
+            {scheduleNote} Held in person at {contest.venue}, {contest.address}.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Rules() {
+  return (
+    <section id="rules" className="py-20">
+      <div className="wrap">
+        <h2 className="section-title">Rules</h2>
+        {/* Column flow rather than a grid: grid rows size to their tallest item
+            and leave ragged gaps between rules. */}
+        <ul className="mt-10 sm:columns-2 sm:gap-x-10">
+          {rules.map((r) => (
+            <li key={r} className="mb-3 flex break-inside-avoid gap-2.5 text-sm text-ink-soft">
+              <span aria-hidden className="text-cca-red">
+                ▸
+              </span>
+              <span>{r}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+function Prizes() {
+  return (
+    <section id="prizes" className="bg-band py-20">
+      <div className="wrap text-center">
+        <h2 className="section-title">Prizes</h2>
+        <p className="mt-6">
+          <span className="inline-block rounded border border-cca-deep/35 px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.14em] text-cca-deep">
+            TBD
+          </span>
+        </p>
+        <p className="lede mt-5">Prize details will be announced closer to the contest.</p>
+      </div>
+    </section>
+  );
+}
+
+function Team() {
+  return (
+    <section id="team" className="py-20">
+      <div className="wrap">
+        <h2 className="section-title">The Team</h2>
+        <p className="lede">{site.name} is written and run by students at Canyon Crest Academy.</p>
+
+        <ul className="mx-auto mt-10 max-w-xl">
+          {team.map((m) => (
+            <li key={m.name} className="flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-rule py-3 last:border-0">
+              <span aria-hidden className="text-cca-red">
+                ▸
+              </span>
+              <span className="font-semibold">{m.name}</span>
+              <span className="text-sm italic text-ink-soft">{m.roles.join(', ')}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   );
 }

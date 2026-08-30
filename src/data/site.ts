@@ -103,7 +103,7 @@ export const team = [
 ] as const;
 
 export const navLinks = [
-  { href: '#details', label: 'Details' },
+  { href: '#about', label: 'About' },
   { href: '#schedule', label: 'Schedule' },
   { href: '#rules', label: 'Rules' },
   { href: '#prizes', label: 'Prizes' },

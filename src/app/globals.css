@@ -4,91 +4,78 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono-jb), ui-monospace, 'SF Mono', Menlo, monospace;
 
-  /* Canyon Crest Academy: black ground, red accent. Text stays white at
-     varying opacity — red is used for emphasis only, never for body copy,
-     since red-on-black at small sizes is hard to read. */
-  /* Sampled from the CCAPC logo artwork: the beak is pure #ff0000. */
+  /* Deep crimson for the hero field — pure #ff0000 is unreadable at that size,
+     so the brand red is reserved for small accents. */
+  --color-cca-deep: #8e1116;
   --color-cca-red: #ff0000;
-  --color-cca-red-deep: #990000;
+
+  --color-ink: #16181d;
+  --color-ink-soft: #5b6270;
+  --color-rule: #e4e6ea;
+  --color-band: #f5f6f8;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Offset anchor jumps so headings clear the sticky nav. */
-    scroll-padding-top: 6rem;
+    /* Clear the sticky nav when an anchor is jumped to. */
+    scroll-padding-top: 4rem;
   }
 
   body {
-    background-color: #000;
-    color: #e8e8e8;
+    background-color: #fff;
+    color: var(--color-ink);
     -webkit-font-smoothing: antialiased;
   }
 
   ::selection {
-    background-color: color-mix(in srgb, var(--color-cca-red) 45%, transparent);
-    color: #fff;
+    background-color: color-mix(in srgb, var(--color-cca-deep) 22%, transparent);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-cca-red);
+    outline: 2px solid var(--color-cca-deep);
     outline-offset: 3px;
-    border-radius: 2px;
+    border-radius: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.001ms !important;
+    }
   }
 }
 
 @layer components {
-  .eyebrow {
-    @apply font-mono text-xs uppercase tracking-[0.22em] text-white/40;
+  .wrap {
+    @apply mx-auto w-full max-w-5xl px-6;
   }
 
-  /* The translucent card. Sits on black, so a low-alpha white fill reads as
-     frosted glass rather than as grey. */
-  .glass {
-    @apply rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl;
-    box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.9);
+  .card {
+    @apply rounded-xl border border-rule bg-white p-6;
   }
 
-  .panel {
-    @apply rounded-2xl border border-white/10 bg-white/[0.03];
+  .section-title {
+    @apply text-center text-3xl font-extrabold tracking-tight;
   }
 
-  .link-underline {
-    @apply text-white/50 transition-colors hover:text-white;
+  .lede {
+    @apply mx-auto mt-5 max-w-2xl text-center text-ink-soft;
   }
 }
 
-/* Scroll reveal. Elements start lowered and transparent, and the observer
-   adds .is-visible as they enter the viewport. */
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
-}
-
-[data-reveal].is-visible {
-  opacity: 1;
-  transform: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  /* Never hide content from someone who asked for no motion. */
-  [data-reveal] {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    transition-duration: 0.001ms !important;
-  }
+/* Faint diagonal weave so the flat hero field has some texture. */
+.hero-weave::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(45deg, #fff 0 1px, transparent 1px 22px),
+    repeating-linear-gradient(-45deg, #fff 0 1px, transparent 1px 22px);
 }

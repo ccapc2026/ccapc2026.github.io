@@ -2,22 +2,14 @@ import { contest, site } from '@/data/site';
 
 export default function Footer() {
   return (
-    <footer className="mt-8 border-t border-white/10 bg-black/60 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-10 font-mono text-xs text-white/35 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+    <footer className="bg-cca-deep text-white/85">
+      <div className="wrap flex flex-wrap justify-between gap-3 py-8 text-sm">
         <p>
-          © {new Date().getFullYear()} {site.title} · Canyon Crest Academy
+          © {new Date().getFullYear()} {site.name} · Canyon Crest Academy
         </p>
-        <p className="flex flex-wrap items-center gap-x-4 gap-y-2">
-          <a
-            href={contest.discordUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="text-white/70 transition-colors hover:text-white"
-          >
-            Discord
-          </a>
-          <span>{contest.format}</span>
-        </p>
+        <a href={contest.discordUrl} target="_blank" rel="noreferrer" className="underline-offset-4 hover:underline">
+          Discord
+        </a>
       </div>
     </footer>
   );
