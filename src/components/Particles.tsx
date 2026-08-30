@@ -15,10 +15,15 @@ export default function Particles() {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const canvas = ref.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    const el = ref.current;
+    if (!el) return;
+    const context = el.getContext('2d');
+    if (!context) return;
+
+    // Narrowing does not survive into the hoisted function declarations below,
+    // so capture non-null aliases once and use those throughout.
+    const cv: HTMLCanvasElement = el;
+    const g: CanvasRenderingContext2D = context;
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -104,7 +109,7 @@ export default function Particles() {
           const offset = (sIdx - rb.strands / 2) * rb.spread;
           const scale = 1 + (sIdx - rb.strands / 2) * 0.012;
 
-          ctx!.beginPath();
+          g.beginPath();
           for (let x = -STEP; x <= width + STEP; x += STEP) {
             const p = x / width;
             const y =
@@ -113,12 +118,12 @@ export default function Particles() {
               p * rb.tilt +
               Math.sin(x / rb.len1 + drift) * rb.amp1 * scale +
               Math.sin(x / rb.len2 - drift * 1.6) * rb.amp2;
-            if (x <= 0) ctx!.moveTo(x, y);
-            else ctx!.lineTo(x, y);
+            if (x <= 0) g.moveTo(x, y);
+            else g.lineTo(x, y);
           }
-          ctx!.strokeStyle = `rgba(255,255,255,${rb.alpha})`;
-          ctx!.lineWidth = 1;
-          ctx!.stroke();
+          g.strokeStyle = `rgba(255,255,255,${rb.alpha})`;
+          g.lineWidth = 1;
+          g.stroke();
         }
       }
     }
@@ -127,24 +132,24 @@ export default function Particles() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       width = window.innerWidth;
       height = window.innerHeight;
-      canvas.width = Math.floor(width * dpr);
-      canvas.height = Math.floor(height * dpr);
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cv.width = Math.floor(width * dpr);
+      cv.height = Math.floor(height * dpr);
+      cv.style.width = `${width}px`;
+      cv.style.height = `${height}px`;
+      g.setTransform(dpr, 0, 0, dpr, 0, 0);
       seed();
       seedCurves();
     }
 
     /** One static frame, for viewers who asked not to see motion. */
     function drawStatic() {
-      ctx!.clearRect(0, 0, width, height);
+      g.clearRect(0, 0, width, height);
       drawCurves(0);
       for (const p of points) {
-        ctx!.beginPath();
-        ctx!.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx!.fillStyle = `rgba(${p.c},0.3)`;
-        ctx!.fill();
+        g.beginPath();
+        g.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        g.fillStyle = `rgba(${p.c},0.3)`;
+        g.fill();
       }
     }
 
@@ -152,7 +157,7 @@ export default function Particles() {
 
     function tick() {
       if (!running) return;
-      ctx!.clearRect(0, 0, width, height);
+      g.clearRect(0, 0, width, height);
       drawCurves(performance.now());
 
       for (const p of points) {
@@ -174,20 +179,20 @@ export default function Particles() {
           const d2 = dx * dx + dy * dy;
           if (d2 > LINK * LINK) continue;
           const alpha = (1 - Math.sqrt(d2) / LINK) * 0.18;
-          ctx!.beginPath();
-          ctx!.moveTo(a.x, a.y);
-          ctx!.lineTo(b.x, b.y);
-          ctx!.strokeStyle = `rgba(${WHITE},${alpha})`;
-          ctx!.lineWidth = 1;
-          ctx!.stroke();
+          g.beginPath();
+          g.moveTo(a.x, a.y);
+          g.lineTo(b.x, b.y);
+          g.strokeStyle = `rgba(${WHITE},${alpha})`;
+          g.lineWidth = 1;
+          g.stroke();
         }
       }
 
       for (const p of points) {
-        ctx!.beginPath();
-        ctx!.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx!.fillStyle = `rgba(${p.c},0.42)`;
-        ctx!.fill();
+        g.beginPath();
+        g.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        g.fillStyle = `rgba(${p.c},0.42)`;
+        g.fill();
       }
 
       frame = requestAnimationFrame(tick);
