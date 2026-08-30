@@ -1,0 +1,16 @@
+node_modules/
+.next/
+.next-build/
+out/
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+.env*.local
+
+# Local reference material and scratch copies — not part of the site.
+/TJ IOI 2026.html
+/referencesite#1.html
+/referencesite#1_files/
+/reference/
+/ccapc (1).webp
+/ccapc.webp
