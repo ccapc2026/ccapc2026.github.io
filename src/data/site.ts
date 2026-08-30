@@ -59,8 +59,18 @@ export const schedule = { status: 'TBD' } as const;
 /** Replace with real prizes once confirmed. */
 export const prizes = { status: 'TBD' } as const;
 
+/** Organizers. Roles render as a comma-separated list after the name. */
+export const team = [
+  { name: 'Aidan Bai', roles: ['Problem Setter', 'Organizer'] },
+  { name: 'Dylan Kim', roles: ['Problem Setter', 'Organizer'] },
+  { name: 'William Allen', roles: ['Problem Setter', 'Organizer'] },
+  { name: 'Smaran Mukkavilli', roles: ['Problem Setter', 'Organizer'] },
+  { name: 'Jake Kuo', roles: ['Problem Setter', 'Organizer'] },
+] as const;
+
 export const navLinks = [
   { href: '#details', label: 'Details' },
   { href: '#schedule', label: 'Schedule' },
   { href: '#prizes', label: 'Prizes' },
+  { href: '#team', label: 'Team' },
 ] as const;

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Box, BoxGrid } from '@/components/ui';
-import { contest, divisions, site } from '@/data/site';
+import { contest, divisions, site, team } from '@/data/site';
 
 export default function Home() {
   return (
@@ -151,6 +151,22 @@ function Boxes() {
           <Tbd>Prize details will be announced closer to the contest.</Tbd>
         </Box>
       </div>
+      <Box id="team" eyebrow="Organizers" title="The Team">
+        <p className="mb-8 max-w-2xl leading-relaxed text-white/50">
+          CCAPC is written and run by students at Canyon Crest Academy.
+        </p>
+        <ul className="space-y-4">
+          {team.map((m) => (
+            <li key={m.name} className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <span className="font-semibold text-white">{m.name}</span>
+              <span aria-hidden className="text-white/20">
+                |
+              </span>
+              <span className="italic text-white/55">{m.roles.join(', ')}</span>
+            </li>
+          ))}
+        </ul>
+      </Box>
     </BoxGrid>
   );
 }
