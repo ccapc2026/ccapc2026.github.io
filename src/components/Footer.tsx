@@ -7,7 +7,17 @@ export default function Footer() {
         <p>
           © {new Date().getFullYear()} {site.title} · Canyon Crest Academy
         </p>
-        <p>{contest.format}</p>
+        <p className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <a
+            href={contest.discordUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="text-white/70 transition-colors hover:text-white"
+          >
+            Discord
+          </a>
+          <span>{contest.format}</span>
+        </p>
       </div>
     </footer>
   );

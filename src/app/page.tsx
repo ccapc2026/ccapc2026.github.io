@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Box, BoxGrid } from '@/components/ui';
-import { contest, divisions, site, team } from '@/data/site';
+import { contest, divisions, rules, schedule, scheduleNote, site, team } from '@/data/site';
 
 export default function Home() {
   return (
@@ -127,10 +127,14 @@ function Boxes() {
         <dl className="divide-y divide-white/10">
           {(
             [
+              ['Date', contest.date],
+              ['Venue', `${contest.venue} — ${contest.address}`],
               ['Format', contest.format],
               ['Platform', contest.platform],
               ['Languages', contest.languages.join(', ')],
               ['Divisions', divisions.map((d) => d.name).join(' \u00b7 ')],
+              ['Teams', 'Up to 3 people'],
+              ['Problems', '12 per division'],
             ] as [string, string][]
           ).map(([label, value], i) => (
             <div key={label} className={`flex flex-wrap gap-x-10 gap-y-1 py-4 ${i === 0 ? 'pt-0' : ''}`}>
@@ -143,9 +147,47 @@ function Boxes() {
         </dl>
       </Box>
 
+      <Box id="rules" eyebrow="Before you compete" title="Rules">
+        {/* Multi-column flow rather than a grid: rows in a 2-col grid size to
+            their tallest item, which left ragged gaps between rules. */}
+        <ul className="sm:columns-2 sm:gap-x-12">
+          {rules.map((r) => (
+            <li key={r} className="mb-3 flex break-inside-avoid gap-3 text-white/70">
+              <span aria-hidden className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-white/30" />
+              <span className="leading-relaxed">{r}</span>
+            </li>
+          ))}
+        </ul>
+      </Box>
+
       <div className="grid gap-8 sm:gap-10 lg:grid-cols-2">
         <Box id="schedule" eyebrow="Contest day" title="Schedule">
-          <Tbd>The contest-day schedule will be posted here once it is finalized.</Tbd>
+          <p className="mb-6 text-sm text-white/40">Tentative · all times Pacific</p>
+          <table className="w-full border-collapse text-left">
+            <tbody>
+              {schedule.map((row) => (
+                <tr key={row.time} className="border-b border-white/10 last:border-0">
+                  <td className="py-3 pr-6 align-top font-mono text-sm whitespace-nowrap text-white/60">
+                    {row.time}
+                  </td>
+                  <td className="py-3 align-top text-white">{row.event}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="mt-6 text-sm text-white/50">{scheduleNote}</p>
+          <p className="mt-3 text-sm text-white/40">
+            The Codeforces group link will be posted closer to the contest. Join the{' '}
+            <a
+              href={contest.discordUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="text-white/70 underline underline-offset-4 hover:text-white"
+            >
+              Discord
+            </a>{' '}
+            for questions and announcements.
+          </p>
         </Box>
         <Box id="prizes" eyebrow="Awards" title="Prizes">
           <Tbd>Prize details will be announced closer to the contest.</Tbd>

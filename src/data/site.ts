@@ -31,6 +31,16 @@ export const contest = {
   platform: 'Codeforces',
   languages: ['Python', 'Java', 'C++'],
 
+  date: 'October 17, 2026',
+  venue: 'Canyon Crest Academy',
+  address: '5951 Village Center Loop Road, San Diego, CA 92130',
+  /** Room is not announced yet. */
+  room: null as string | null,
+
+  discordUrl: 'https://discord.gg/Gf5M4JFxEY',
+  /** Posted closer to the contest. */
+  codeforcesGroupUrl: null as string | null,
+
   /** Set when the guide PDF exists; until then the button renders disabled. */
   guideUrl: '/ccapc-2026-contest-guide.pdf' as string | null,
 
@@ -53,8 +63,32 @@ export const divisions = [
   },
 ] as const;
 
-/** Replace with real rows when the day is planned. */
-export const schedule = { status: 'TBD' } as const;
+/** Tentative day-of schedule, Pacific Time. */
+export const schedule = [
+  { time: '8:15am – 9:15am', event: 'Check In / Opening Ceremony' },
+  { time: '9:15am – 12:45pm', event: 'Contest' },
+  { time: '12:45pm – 1:45pm', event: 'Lunch' },
+  { time: '1:45pm – 2:45pm', event: 'Activities' },
+  { time: '2:45pm – 3:15pm', event: 'Closing' },
+] as const;
+
+/** Shown under the schedule table. */
+export const scheduleNote = 'The actual contest is from 9:00am – 12:30pm.';
+
+export const rules = [
+  'Internet usage is allowed — you may look at helpful resources online.',
+  'Pre-written code (templates) are allowed.',
+  'You may copy code from the internet that was written prior to the start of the competition.',
+  'Teams of up to 3 are allowed.',
+  'The AI policy is adopted from Codeforces.',
+  'No using AI to help on problems in any way, besides autocomplete and translation between spoken languages (not programming languages).',
+  'No communicating with other teams during the competition to gain an advantage.',
+  'You may communicate within your own team and share code.',
+  'All submissions must be made during the 3.5 hour window.',
+  'In the case of technical issues, please contact an organizer.',
+  'Use common sense.',
+  'Breaking rules may result in disqualification.',
+] as const;
 
 /** Replace with real prizes once confirmed. */
 export const prizes = { status: 'TBD' } as const;
@@ -71,6 +105,7 @@ export const team = [
 export const navLinks = [
   { href: '#details', label: 'Details' },
   { href: '#schedule', label: 'Schedule' },
+  { href: '#rules', label: 'Rules' },
   { href: '#prizes', label: 'Prizes' },
   { href: '#team', label: 'Team' },
 ] as const;
