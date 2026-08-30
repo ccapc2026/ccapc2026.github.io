@@ -7,9 +7,14 @@ static site so it can be hosted free on GitHub Pages.
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
-npm run build    # static site → ./out
+npm run dev              # http://localhost:3000
+npm run build            # static site → ./out
+npm run build:isolated   # same, but to .next-build — use while `npm run dev` is running
 ```
+
+`next build` and `next dev` share the `.next` directory and will corrupt each
+other if run at once. `build:isolated` writes elsewhere so you can build without
+stopping the dev server; note it emits the site into `.next-build/`, not `out/`.
 
 ## Editing content
 
