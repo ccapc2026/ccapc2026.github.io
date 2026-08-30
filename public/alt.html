@@ -24,6 +24,15 @@
     --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
   }
   * { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    /* Clear the sticky nav (~46px) when an anchor is jumped to. */
+    scroll-padding-top: 4rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
   body { margin: 0; background: var(--page); color: var(--ink); font-family: var(--sans); line-height: 1.6; }
   .wrap { max-width: 68rem; margin-inline: auto; padding-inline: 1.5rem; }
   a { color: inherit; }
