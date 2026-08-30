@@ -64,7 +64,7 @@ export const team = [
   { name: 'Aidan Bai', roles: ['Problem Setter', 'Organizer'] },
   { name: 'Dylan Kim', roles: ['Problem Setter', 'Organizer'] },
   { name: 'William Allen', roles: ['Problem Setter', 'Organizer'] },
-  { name: 'Smaran Mukkavilli', roles: ['Problem Setter', 'Organizer'] },
+  { name: 'Smaran Mukkavilli', roles: ['Problem Setter', 'Organizer', 'Website Developer'] },
   { name: 'Jake Kuo', roles: ['Problem Setter', 'Organizer'] },
 ] as const;
 
