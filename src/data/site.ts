@@ -73,7 +73,7 @@ export const schedule = [
 ] as const;
 
 /** Shown under the schedule table. */
-export const scheduleNote = 'The actual contest is from 9:00am – 12:30pm.';
+export const scheduleNote = 'The actual contest is from 9:15am – 12:45pm.';
 
 export const rules = [
   'Internet usage is allowed — you may look at helpful resources online.',
