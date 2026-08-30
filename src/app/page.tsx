@@ -103,6 +103,21 @@ function GuideCard() {
       <p className="mt-8 text-sm leading-relaxed text-white/50">
         Everything you need to know before contest day — format, what to bring, and how the judge works.
       </p>
+
+      <div className="mt-8 w-full border-t border-white/10 pt-8">
+        <a
+          href={contest.discordUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="flex w-full items-center justify-center gap-2.5 rounded-xl bg-white px-5 py-3.5 text-sm font-semibold text-black transition-transform hover:-translate-y-0.5 hover:bg-white/90"
+        >
+          <ChatGlyph />
+          Join the Discord
+        </a>
+        <p className="mt-3 text-center text-xs leading-relaxed text-white/45">
+          Announcements, questions, and the Codeforces group link when it goes out.
+        </p>
+      </div>
     </aside>
   );
 }
@@ -111,6 +126,23 @@ function GuideCard() {
  * The tiled box layout: divisions paired across the top, contest details full
  * width beneath them, then schedule and prizes paired again.
  */
+function ChatGlyph() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden
+      className="h-4 w-4"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z" />
+    </svg>
+  );
+}
+
 function Boxes() {
   return (
     <BoxGrid className="pb-32">
@@ -134,6 +166,7 @@ function Boxes() {
               ['Languages', contest.languages.join(', ')],
               ['Divisions', divisions.map((d) => d.name).join(' \u00b7 ')],
               ['Teams', 'Up to 3 people'],
+              ['Community', 'Discord'],
               ['Problems', '12 per division'],
             ] as [string, string][]
           ).map(([label, value], i) => (
@@ -141,7 +174,20 @@ function Boxes() {
               <dt className="w-32 shrink-0 font-mono text-[11px] uppercase tracking-[0.15em] text-white/35">
                 {label}
               </dt>
-              <dd className="text-white">{value}</dd>
+              <dd className="text-white">
+                {label === 'Community' ? (
+                  <a
+                    href={contest.discordUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline decoration-white/30 underline-offset-4 transition-colors hover:decoration-white"
+                  >
+                    {value}
+                  </a>
+                ) : (
+                  value
+                )}
+              </dd>
             </div>
           ))}
         </dl>
