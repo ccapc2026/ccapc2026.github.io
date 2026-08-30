@@ -32,7 +32,7 @@ export const contest = {
   languages: ['Python', 'Java', 'C++'],
 
   /** Set when the guide PDF exists; until then the button renders disabled. */
-  guideUrl: null as string | null,
+  guideUrl: '/ccapc-2026-contest-guide.pdf' as string | null,
 
   /** Set to a real URL to turn on the Register button. */
   registrationUrl: null as string | null,
@@ -43,13 +43,13 @@ export const divisions = [
     name: 'Beginner',
     accent: 'emerald' as const,
     blurb: 'For competitors new to contest programming.',
-    range: 'Roughly low USACO Bronze through Silver.',
+    range: 'Recommended for everyone else.',
   },
   {
     name: 'Advanced',
     accent: 'violet' as const,
     blurb: 'For experienced competitors who want a real challenge.',
-    range: 'Roughly USACO Silver through high Gold.',
+    range: 'Recommended for Codeforces 1500+ / high USACO Silver and above.',
   },
 ] as const;
 
