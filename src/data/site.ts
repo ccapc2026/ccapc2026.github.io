@@ -95,7 +95,7 @@ export const prizes = { status: 'TBD' } as const;
 
 /** Organizers. Roles render as a comma-separated list after the name. */
 export const team = [
-  { name: 'Aidan Bai', roles: ['Problem Setter', 'Organizer'] },
+  { name: 'Aidan Bai', roles: ['Founder', 'Problem Setter', 'Organizer'] },
   { name: 'Dylan Kim', roles: ['Problem Setter', 'Organizer'] },
   { name: 'William Allen', roles: ['Problem Setter', 'Organizer'] },
   { name: 'Smaran Mukkavilli', roles: ['Problem Setter', 'Organizer', 'Website Developer'] },
