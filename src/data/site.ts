@@ -29,7 +29,10 @@ export const contest = {
 
   format: 'In person at Canyon Crest Academy',
   platform: 'Codeforces',
-  languages: ['Python', 'Java', 'C++'],
+  /* Codeforces' own list is long and changes over time, so state the rule
+     rather than pinning a snapshot of it here. */
+  languages: 'Any language supported by Codeforces',
+  languagesShort: 'All Codeforces languages',
 
   date: 'October 17, 2026',
   venue: 'Canyon Crest Academy',
