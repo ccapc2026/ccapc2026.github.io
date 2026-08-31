@@ -31,8 +31,8 @@ export const contest = {
   platform: 'Codeforces',
   /* Codeforces' own list is long and changes over time, so state the rule
      rather than pinning a snapshot of it here. */
-  languages: 'Any language supported by Codeforces',
-  languagesShort: 'All Codeforces languages',
+  languages: 'All coding languages supported by Codeforces',
+  languagesShort: 'All coding languages supported by Codeforces',
 
   date: 'October 17, 2026',
   venue: 'Canyon Crest Academy',

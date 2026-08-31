@@ -147,8 +147,8 @@ function About() {
             <article className="card">
               <h3 className="font-semibold">What you can use</h3>
               <p className="mt-2 text-sm text-ink-soft">
-                {contest.languages} — C++, Java, Python and the rest of its list. Pre-written templates
-                and online resources are allowed; AI assistance on problems is not.
+                {contest.languages}. Pre-written templates and online resources are allowed; AI
+                assistance on problems is not.
               </p>
             </article>
           </div>
