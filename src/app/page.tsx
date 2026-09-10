@@ -36,13 +36,15 @@ function Hero() {
       <div className="wrap relative py-16 sm:py-20">
         <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:gap-12">
           <span className="shrink-0 rounded-2xl bg-white p-3.5">
+            {/* Tight crop: the source art only fills ~76% of its frame, so the
+                padded original renders visibly smaller at the same box size. */}
             <Image
-              src="/ccapc-logo.webp"
+              src="/ccapc-logo-tight.webp"
               alt="CCAPC"
-              width={756}
-              height={756}
+              width={1553}
+              height={1553}
               priority
-              className="h-28 w-auto sm:h-32"
+              className="h-32 w-auto sm:h-40"
             />
           </span>
 
