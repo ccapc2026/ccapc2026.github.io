@@ -35,14 +35,14 @@ function Hero() {
     <section id="top" className="hero-weave relative overflow-hidden bg-cca-deep text-white">
       <div className="wrap relative py-16 sm:py-20">
         <div className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:gap-12">
-          <span className="shrink-0 rounded-2xl bg-white p-4">
+          <span className="shrink-0 rounded-2xl bg-white p-3.5">
             <Image
               src="/ccapc-logo.webp"
               alt="CCAPC"
               width={756}
               height={756}
               priority
-              className="h-20 w-auto sm:h-24"
+              className="h-28 w-auto sm:h-32"
             />
           </span>
 
