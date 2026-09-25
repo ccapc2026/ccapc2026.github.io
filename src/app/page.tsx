@@ -66,12 +66,22 @@ function Hero() {
         </div>
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
+          {contest.registrationUrl && (
+            <a
+              href={contest.registrationUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-lg bg-white px-6 py-2.5 text-sm font-semibold text-cca-deep transition-transform hover:-translate-y-0.5"
+            >
+              Register
+            </a>
+          )}
           {contest.guideUrl && (
             <a
               href={contest.guideUrl}
               target="_blank"
               rel="noreferrer"
-              className="rounded-lg bg-white px-6 py-2.5 text-sm font-semibold text-cca-deep transition-transform hover:-translate-y-0.5"
+              className="rounded-lg border border-white/55 px-6 py-2.5 text-sm font-semibold transition-transform hover:-translate-y-0.5 hover:border-white"
             >
               Contest Guide
             </a>
@@ -238,11 +248,20 @@ function Sponsors() {
         <Rail num="05" title="Sponsors" />
         <ul className="mt-10 flex flex-wrap gap-4">
           {sponsors.map((sp) => (
-            <li
-              key={sp.name}
-              className="rounded-xl border border-rule px-8 py-6 text-xl font-semibold tracking-tight"
-            >
-              {sp.name}
+            <li key={sp.name}>
+              <a
+                href={sp.url}
+                target="_blank"
+                rel="noreferrer sponsored"
+                aria-label={`${sp.name} (opens in a new tab)`}
+                className="flex min-h-[104px] items-center justify-center rounded-xl border border-rule px-10 py-7 transition-colors hover:border-ink/35 hover:bg-band"
+              >
+                {'logo' in sp && sp.logo ? (
+                  <Image src={sp.logo} alt={sp.name} width={sp.width} height={sp.height} className="h-9 w-auto" />
+                ) : (
+                  <span className="text-xl font-semibold tracking-tight">{sp.name}</span>
+                )}
+              </a>
             </li>
           ))}
         </ul>

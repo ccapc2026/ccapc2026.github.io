@@ -23,14 +23,14 @@ export default function Nav() {
               {l.label}
             </a>
           ))}
-          {contest.guideUrl && (
+          {contest.registrationUrl && (
             <a
-              href={contest.guideUrl}
+              href={contest.registrationUrl}
               target="_blank"
               rel="noreferrer"
               className="ml-1 rounded bg-white px-3 py-1 text-[13px] font-semibold text-cca-deep transition-colors hover:bg-white/90"
             >
-              Guide
+              Register
             </a>
           )}
         </nav>

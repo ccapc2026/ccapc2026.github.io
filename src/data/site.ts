@@ -40,7 +40,7 @@ export const contest = {
   /** Room is not announced yet. */
   room: null as string | null,
 
-  discordUrl: 'https://discord.gg/Gf5M4JFxEY',
+  discordUrl: 'https://discord.gg/qDF68NdgCS',
   /** Posted closer to the contest. */
   codeforcesGroupUrl: null as string | null,
 
@@ -48,7 +48,7 @@ export const contest = {
   guideUrl: '/ccapc-2026-contest-guide.pdf' as string | null,
 
   /** Set to a real URL to turn on the Register button. */
-  registrationUrl: null as string | null,
+  registrationUrl: 'https://forms.gle/WRrfYEzTNSofF8eQA' as string | null,
 } as const;
 
 export const divisions = [
@@ -105,7 +105,10 @@ export const team = [
   { name: 'Jake Kuo', roles: ['Problem Setter', 'Organizer'] },
 ] as const;
 
-export const sponsors = [{ name: 'Cognition' }] as const;
+/** `logo` is a path under /public; without one the name renders as text. */
+export const sponsors = [
+  { name: 'Cognition', logo: '/cognition.webp', width: 548, height: 119, url: 'https://cognition.ai' },
+] as const;
 
 export const navLinks = [
   { href: '#about', label: 'About' },
