@@ -34,7 +34,7 @@ export const contest = {
   languages: 'All coding languages supported by Codeforces',
   languagesShort: 'All coding languages supported by Codeforces',
 
-  date: 'October 17, 2026',
+  date: 'October 18, 2026',
   venue: 'Canyon Crest Academy',
   address: '5951 Village Center Loop Road, San Diego, CA 92130',
   /** Room is not announced yet. */
@@ -105,10 +105,13 @@ export const team = [
   { name: 'Jake Kuo', roles: ['Problem Setter', 'Organizer'] },
 ] as const;
 
+export const sponsors = [{ name: 'Cognition' }] as const;
+
 export const navLinks = [
   { href: '#about', label: 'About' },
   { href: '#schedule', label: 'Schedule' },
   { href: '#rules', label: 'Rules' },
   { href: '#prizes', label: 'Prizes' },
+  { href: '#sponsors', label: 'Sponsors' },
   { href: '#team', label: 'Team' },
 ] as const;

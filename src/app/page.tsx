@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { contest, divisions, rules, schedule, scheduleNote, site, team } from '@/data/site';
+import { contest, divisions, rules, schedule, scheduleNote, site, sponsors, team } from '@/data/site';
 
 export default function Home() {
   return (
@@ -10,6 +10,7 @@ export default function Home() {
       <Schedule />
       <Rules />
       <Prizes />
+      <Sponsors />
       <Team />
     </>
   );
@@ -230,12 +231,32 @@ function Prizes() {
   );
 }
 
+function Sponsors() {
+  return (
+    <section id="sponsors" className="py-20">
+      <div className="wrap">
+        <Rail num="05" title="Sponsors" />
+        <ul className="mt-10 flex flex-wrap gap-4">
+          {sponsors.map((sp) => (
+            <li
+              key={sp.name}
+              className="rounded-xl border border-rule px-8 py-6 text-xl font-semibold tracking-tight"
+            >
+              {sp.name}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 /** Card grid rather than a list. */
 function Team() {
   return (
-    <section id="team" className="py-20">
+    <section id="team" className="bg-band py-20">
       <div className="wrap">
-        <Rail num="05" title="The Team" lede={`${site.name} is written and run by students at Canyon Crest Academy.`} />
+        <Rail num="06" title="The Team" lede={`${site.name} is written and run by students at Canyon Crest Academy.`} />
 
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {team.map((m) => (
