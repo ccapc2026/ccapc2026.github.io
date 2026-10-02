@@ -97,11 +97,21 @@ export const rules = [
 export const prizes = { status: 'TBD' } as const;
 
 /** Organizers. Roles render as a comma-separated list after the name. */
+/** `bio` is optional — members without one render name and roles only. */
 export const team = [
   { name: 'Aidan Bai', roles: ['Founder', 'Problem Setter', 'Organizer'] },
   { name: 'Dylan Kim', roles: ['Problem Setter', 'Organizer'] },
-  { name: 'William Allen', roles: ['Problem Setter', 'Organizer'] },
-  { name: 'Smaran Mukkavilli', roles: ['Problem Setter', 'Organizer', 'Website Developer'] },
+  {
+    name: 'William Allen',
+    roles: ['Problem Setter', 'Organizer'],
+    bio: 'William is a sophomore at CCA. He is in the USACO silver division. Outside of programming he enjoys playing video games and some competitive math.',
+  },
+  {
+    name: 'Smaran Mukkavilli',
+    roles: ['Problem Setter', 'Organizer', 'Website Developer'],
+    bio:
+      'Smaran is a sophomore at CCA and has been interested in coding from a young age. He is in the USACO Silver division. Outside of the USACO series, he enjoys competing in college competitions like CALICO and MITIT. Smaran’s favorite areas of coding are number theory and greedy algorithms. Aside from coding, he enjoys math, guitar, and chess.',
+  },
   { name: 'Jake Kuo', roles: ['Problem Setter', 'Organizer'] },
 ] as const;
 

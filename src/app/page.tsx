@@ -277,11 +277,16 @@ function Team() {
       <div className="wrap">
         <Rail num="06" title="The Team" lede={`${site.name} is written and run by students at Canyon Crest Academy.`} />
 
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* items-start so a card without a bio is not stretched to match a tall
+            neighbour, which left large empty boxes in the grid. */}
+        <ul className="mt-10 grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {team.map((m) => (
-            <li key={m.name} className="rounded-xl border border-rule p-5">
+            <li key={m.name} className="rounded-xl border border-rule bg-white p-5">
               <p className="font-semibold">{m.name}</p>
-              <p className="mt-1.5 text-sm text-ink-soft">{m.roles.join(' · ')}</p>
+              <p className="mt-1.5 text-sm text-cca-deep">{m.roles.join(' · ')}</p>
+              {'bio' in m && m.bio && (
+                <p className="mt-3 border-t border-rule pt-3 text-sm leading-relaxed text-ink-soft">{m.bio}</p>
+              )}
             </li>
           ))}
         </ul>
