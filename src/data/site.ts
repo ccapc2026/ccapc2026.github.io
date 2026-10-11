@@ -68,15 +68,15 @@ export const divisions = [
 
 /** Tentative day-of schedule, Pacific Time. */
 export const schedule = [
-  { time: '8:15am – 9:15am', event: 'Check In / Opening Ceremony' },
-  { time: '9:15am – 12:45pm', event: 'Contest' },
-  { time: '12:45pm – 1:45pm', event: 'Lunch' },
-  { time: '1:45pm – 2:45pm', event: 'Activities' },
-  { time: '2:45pm – 3:15pm', event: 'Closing' },
+  { time: '8:30am – 9:30am', event: 'Check In / Opening Ceremony' },
+  { time: '9:30am – 1:00pm', event: 'Contest' },
+  { time: '1:00pm – 2:00pm', event: 'Lunch' },
+  { time: '2:00pm – 3:00pm', event: 'Activities' },
+  { time: '3:00pm – 3:30pm', event: 'Closing' },
 ] as const;
 
 /** Shown under the schedule table. */
-export const scheduleNote = 'The actual contest is from 9:15am – 12:45pm.';
+export const scheduleNote = 'The actual contest is from 9:30am – 1:00pm.';
 
 export const rules = [
   'Internet usage is allowed — you may look at helpful resources online.',
