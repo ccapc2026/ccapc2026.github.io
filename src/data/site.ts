@@ -107,7 +107,7 @@ export const team = [
   },
   {
     name: 'Dylan Kim',
-    roles: ['Problem Setter', 'Organizer'],
+    roles: ['Co-Founder', 'Problem Setter', 'Organizer'],
     bio:
       'Dylan is a senior at CCA. He started competitive programming in 9th grade and is currently competing in the USACO Gold division and is an Expert on Codeforces. Outside of programming, he enjoys playing the clarinet and watching baseball.',
   },
