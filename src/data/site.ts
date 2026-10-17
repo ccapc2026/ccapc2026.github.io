@@ -18,16 +18,16 @@ export const site = {
 export const contest = {
   /** Difficulty range, stated in the terms competitors actually calibrate on. */
   difficulty: 'Problems range from low USACO Bronze to high USACO Gold.',
-  accessibility: 'Two divisions — Beginner and Advanced — so the contest is accessible to everyone.',
+  accessibility: 'Compete in person or online, with Beginner and Advanced divisions online so the contest is accessible to everyone.',
 
   /** Bullets inside the hero card. */
   highlights: [
     'Problems range from low USACO Bronze to high USACO Gold.',
-    'Two divisions — Beginner and Advanced — accessible to everyone.',
-    'Held in person at Canyon Crest Academy, on Codeforces.',
+    'Compete in person at Canyon Crest Academy or online.',
+    'Teams of 1–3, on Codeforces.',
   ],
 
-  format: 'In person at Canyon Crest Academy',
+  format: 'In person at Canyon Crest Academy, or online',
   platform: 'Codeforces',
   /* Codeforces' own list is long and changes over time, so state the rule
      rather than pinning a snapshot of it here. */
@@ -37,12 +37,12 @@ export const contest = {
   date: 'October 18, 2026',
   venue: 'Canyon Crest Academy',
   address: '5951 Village Center Loop Road, San Diego, CA 92130',
-  /** Room is not announced yet. */
-  room: null as string | null,
+  /** Check-in is outdoors; the opening ceremony and contest are in C205. */
+  checkIn: 'Outside the Administration Building',
+  room: 'Room C205' as string | null,
 
   discordUrl: 'https://discord.gg/qDF68NdgCS',
-  /** Posted closer to the contest. */
-  codeforcesGroupUrl: null as string | null,
+  codeforcesGroupUrl: 'https://codeforces.com/group/pzg20FJ2vN/' as string | null,
 
   /** Set when the guide PDF exists; until then the button renders disabled. */
   guideUrl: '/ccapc-2026-contest-guide.pdf' as string | null,
@@ -50,6 +50,26 @@ export const contest = {
   /** Set to a real URL to turn on the Register button. */
   registrationUrl: 'https://forms.gle/WRrfYEzTNSofF8eQA' as string | null,
 } as const;
+
+/**
+ * The Beginner / Advanced split applies to the ONLINE contest only — every
+ * in-person team competes in one combined division. `tracks` renders the
+ * outer choice; `divisions` renders the online sub-choice beneath it.
+ */
+export const tracks = [
+  {
+    name: 'In person',
+    hasDivisions: false,
+    blurb: 'One combined division for all in-person teams.',
+    detail: 'At Canyon Crest Academy. Check in outside the Administration Building; the opening ceremony and contest are in Room C205.',
+  },
+  {
+    name: 'Online',
+    hasDivisions: true,
+    blurb: 'Two separate divisions, chosen at registration.',
+    detail: null as string | null,
+  },
+] as const;
 
 export const divisions = [
   {
@@ -66,17 +86,19 @@ export const divisions = [
   },
 ] as const;
 
-/** Tentative day-of schedule, Pacific Time. */
+/** Day-of schedule, Pacific Time. Everything but the contest is in person. */
 export const schedule = [
-  { time: '8:30am – 9:30am', event: 'Check In / Opening Ceremony' },
+  { time: '8:30am – 9:00am', event: 'Check in · outside the Administration Building' },
+  { time: '9:00am – 9:30am', event: 'Opening ceremony · Room C205' },
   { time: '9:30am – 1:00pm', event: 'Contest' },
   { time: '1:00pm – 2:00pm', event: 'Lunch' },
-  { time: '2:00pm – 3:00pm', event: 'Activities' },
-  { time: '3:00pm – 3:30pm', event: 'Closing' },
+  { time: '2:00pm – 3:00pm', event: 'Solutions discussion, programming Kahoot and 1v1 tournament' },
+  { time: '3:00pm – 3:30pm', event: 'Closing ceremony and awards' },
 ] as const;
 
 /** Shown under the schedule table. */
-export const scheduleNote = 'The actual contest is from 9:30am – 1:00pm.';
+export const scheduleNote =
+  'The contest itself runs 9:30am – 1:00pm; online teams compete during the same window.';
 
 export const rules = [
   'Internet usage is allowed — you may look at helpful resources online.',
@@ -93,8 +115,42 @@ export const rules = [
   'Breaking rules may result in disqualification.',
 ] as const;
 
-/** Replace with real prizes once confirmed. */
-export const prizes = { status: 'TBD' } as const;
+/**
+ * Prizes are Devin subscriptions and credits, not cash, and the package is
+ * awarded to EACH member of a winning team rather than split across it.
+ */
+export const prizes = {
+  lede:
+    'Prizes are awarded as Devin subscriptions and credits rather than cash. Each member of a winning team receives the package individually.',
+  packages: [
+    { value: '$3,000', detail: '12 months of Devin + $600 in Devin credits' },
+    { value: '$500', detail: '2 months of Devin + $100 in Devin credits' },
+  ],
+  tables: [
+    {
+      title: 'In person',
+      caption: 'All in-person teams',
+      rows: [
+        { place: '1st', package: '$3,000' },
+        { place: '2nd – 5th', package: '$500' },
+      ],
+    },
+    {
+      title: 'Online · Beginner',
+      caption: 'Online teams in Beginner',
+      rows: [{ place: '1st', package: '$500' }],
+    },
+    {
+      title: 'Online · Advanced',
+      caption: 'Online teams in Advanced',
+      rows: [
+        { place: '1st', package: '$3,000' },
+        { place: '2nd', package: '$500' },
+      ],
+    },
+  ],
+  note: 'Medals also go to every member of the top 6 in-person teams.',
+} as const;
 
 /** Organizers. Roles render as a comma-separated list after the name. */
 /** `bio` is optional — members without one render name and roles only. */

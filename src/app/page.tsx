@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { contest, divisions, rules, schedule, scheduleNote, site, sponsors, team } from '@/data/site';
+import { contest, divisions, prizes, rules, schedule, scheduleNote, site, sponsors, team, tracks } from '@/data/site';
 
 export default function Home() {
   return (
@@ -59,8 +59,8 @@ function Hero() {
               Programming Contest
             </h1>
             <p className="mt-5 max-w-xl text-lg text-white/90">
-              A 3.5-hour team contest on {contest.platform}. Two divisions, 12 problems each —
-              from low USACO Bronze to high USACO Gold.
+              A 3.5-hour contest for teams of 1–3, on {contest.platform}. Compete in person at
+              CCA or online — problems range from low USACO Bronze to high USACO Gold.
             </p>
           </div>
         </div>
@@ -94,11 +94,20 @@ function Hero() {
           >
             Join Discord
           </a>
-          <p className="font-mono text-xs text-white/60 sm:ml-2">
-            {contest.codeforcesGroupUrl
-              ? 'Codeforces group is open'
-              : 'Codeforces group link posted closer to the contest'}
-          </p>
+          {contest.codeforcesGroupUrl ? (
+            <a
+              href={contest.codeforcesGroupUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-lg border border-white/55 px-6 py-2.5 text-sm font-semibold transition-transform hover:-translate-y-0.5 hover:border-white"
+            >
+              Codeforces Group
+            </a>
+          ) : (
+            <p className="font-mono text-xs text-white/60 sm:ml-2">
+              Codeforces group link posted closer to the contest
+            </p>
+          )}
         </div>
       </div>
     </section>
@@ -109,7 +118,7 @@ function Hero() {
 function FactStrip() {
   const facts: [string, string][] = [
     ['Date', contest.date],
-    ['Where', `${contest.venue}, San Diego`],
+    ['Where', `${contest.venue} · or online`],
     ['Judge', contest.platform],
     ['Languages', contest.languagesShort],
   ];
@@ -127,7 +136,7 @@ function FactStrip() {
   );
 }
 
-/** Asymmetric: divisions take a wide panel, the two shorter facts stack beside. */
+/** Asymmetric: the two tracks take a wide panel, shorter facts stack beside. */
 function About() {
   return (
     <section id="about" className="py-20">
@@ -136,13 +145,24 @@ function About() {
 
         <div className="mt-10 grid gap-5 lg:grid-cols-[1.35fr_1fr]">
           <article className="rounded-xl border-l-4 border-cca-red bg-band p-7">
-            <h3 className="font-semibold">Two Divisions</h3>
+            <h3 className="font-semibold">Two Ways to Compete</h3>
             <dl className="mt-5 space-y-5">
-              {divisions.map((d) => (
-                <div key={d.name}>
-                  <dt className="font-mono text-xs uppercase tracking-[0.16em] text-cca-deep">{d.name}</dt>
+              {tracks.map((t) => (
+                <div key={t.name}>
+                  <dt className="font-mono text-xs uppercase tracking-[0.16em] text-cca-deep">{t.name}</dt>
                   <dd className="mt-1.5 text-sm text-ink-soft">
-                    <span className="text-ink">{d.blurb}</span> {d.range}
+                    <span className="text-ink">{t.blurb}</span> {t.detail}
+                    {/* Beginner / Advanced exist online only, so they nest
+                        under that track rather than sitting beside it. */}
+                    {t.hasDivisions && (
+                      <ul className="mt-3 space-y-2 border-l border-rule pl-4">
+                        {divisions.map((d) => (
+                          <li key={d.name}>
+                            <span className="font-semibold text-ink">{d.name}</span> — {d.blurb} {d.range}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </dd>
                 </div>
               ))}
@@ -153,8 +173,8 @@ function About() {
             <article className="card">
               <h3 className="font-semibold">Format</h3>
               <p className="mt-2 text-sm text-ink-soft">
-                3.5 hours, teams of up to 3, in a private {contest.platform} group. 12 problems per division,
-                weighted equally and ranked by penalty.
+                3.5 hours, teams of 1–3, in a private {contest.platform} group. Problems are weighted
+                equally; standings rank teams by problems solved, with ties broken on penalty.
               </p>
             </article>
             <article className="card">
@@ -176,7 +196,7 @@ function Schedule() {
   return (
     <section id="schedule" className="bg-band py-20">
       <div className="wrap">
-        <Rail num="02" title="Schedule" lede="Tentative · all times Pacific" />
+        <Rail num="02" title="Schedule" lede="All times Pacific" />
 
         <div className="mt-10 overflow-hidden rounded-xl border border-rule bg-white">
           <table className="w-full text-left">
@@ -197,7 +217,7 @@ function Schedule() {
         </div>
 
         <p className="mt-5 max-w-2xl text-sm text-ink-soft">
-          {scheduleNote} Held in person at {contest.venue}, {contest.address}.
+          {scheduleNote} The in-person day runs at {contest.venue}, {contest.address}.
         </p>
       </div>
     </section>
@@ -229,13 +249,42 @@ function Prizes() {
   return (
     <section id="prizes" className="bg-band py-20">
       <div className="wrap">
-        <Rail num="04" title="Prizes" />
-        <div className="mt-8 flex flex-wrap items-center gap-4">
-          <span className="rounded border border-cca-deep/35 px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.14em] text-cca-deep">
-            TBD
-          </span>
-          <p className="text-ink-soft">Prize details will be announced closer to the contest.</p>
+        <Rail num="04" title="Prizes" lede={prizes.lede} />
+
+        <div className="mt-10 grid gap-5 sm:grid-cols-2">
+          {prizes.packages.map((pkg) => (
+            <article key={pkg.value} className="rounded-xl border-l-4 border-cca-red bg-white p-7">
+              <p className="font-mono text-xs uppercase tracking-[0.16em] text-cca-deep">Prize package</p>
+              <p className="mt-2 text-3xl font-extrabold tracking-tight">{pkg.value}</p>
+              <p className="mt-2 text-sm text-ink-soft">{pkg.detail}</p>
+            </article>
+          ))}
         </div>
+
+        {/* items-start: the Beginner table has a single row, and stretching it
+            to match the others would leave a tall empty card. */}
+        <div className="mt-5 grid items-start gap-5 lg:grid-cols-3">
+          {prizes.tables.map((t) => (
+            <article key={t.title} className="overflow-hidden rounded-xl border border-rule bg-white">
+              <div className="border-b border-rule px-6 py-4">
+                <h3 className="font-semibold">{t.title}</h3>
+                <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-ink-soft">
+                  {t.caption}
+                </p>
+              </div>
+              <dl className="divide-y divide-rule">
+                {t.rows.map((r) => (
+                  <div key={r.place} className="flex items-baseline justify-between gap-4 px-6 py-3.5">
+                    <dt className="font-mono text-[13px] text-ink-soft">{r.place}</dt>
+                    <dd className="text-sm font-semibold">{r.package} package</dd>
+                  </div>
+                ))}
+              </dl>
+            </article>
+          ))}
+        </div>
+
+        <p className="mt-5 max-w-2xl text-sm text-ink-soft">{prizes.note}</p>
       </div>
     </section>
   );
