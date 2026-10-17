@@ -1,5 +1,18 @@
 import Image from 'next/image';
-import { contest, divisions, prizes, rules, schedule, scheduleNote, site, sponsors, team, tracks } from '@/data/site';
+import {
+  asset,
+  campusMap,
+  contest,
+  divisions,
+  prizes,
+  rules,
+  schedule,
+  scheduleNote,
+  site,
+  sponsors,
+  team,
+  tracks,
+} from '@/data/site';
 
 export default function Home() {
   return (
@@ -78,7 +91,7 @@ function Hero() {
           )}
           {contest.guideUrl && (
             <a
-              href={contest.guideUrl}
+              href={asset(contest.guideUrl)}
               target="_blank"
               rel="noreferrer"
               className="rounded-lg border border-white/55 px-6 py-2.5 text-sm font-semibold transition-transform hover:-translate-y-0.5 hover:border-white"
@@ -219,6 +232,26 @@ function Schedule() {
         <p className="mt-5 max-w-2xl text-sm text-ink-soft">
           {scheduleNote} The in-person day runs at {contest.venue}, {contest.address}.
         </p>
+
+        {/* The map is dense, so it opens full size in a new tab for anyone
+            reading on a phone. */}
+        <figure className="mt-8 overflow-hidden rounded-xl border border-rule bg-white">
+          <a href={asset(campusMap.src)} target="_blank" rel="noreferrer">
+            <Image
+              src={campusMap.src}
+              alt={campusMap.alt}
+              width={campusMap.width}
+              height={campusMap.height}
+              className="h-auto w-full"
+            />
+          </a>
+          <figcaption className="border-t border-rule px-6 py-4 text-sm text-ink-soft">
+            <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-cca-deep">
+              Campus map
+            </span>
+            <span className="mt-1.5 block">{campusMap.caption}</span>
+          </figcaption>
+        </figure>
       </div>
     </section>
   );

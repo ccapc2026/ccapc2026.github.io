@@ -100,6 +100,23 @@ export const schedule = [
 export const scheduleNote =
   'The contest itself runs 9:30am – 1:00pm; online teams compete during the same window.';
 
+/**
+ * Campus map from the participant guide. `next/image` prefixes basePath on
+ * its own; a plain href to the same file does not, hence `asset()`.
+ */
+export const campusMap = {
+  src: '/cca-campus-map.webp',
+  width: 1800,
+  height: 1017,
+  alt:
+    'Canyon Crest Academy campus map. Check-in is marked at the Administration Building on the right, the opening ceremony and contest in Building C at the top, lunch at the lunch tables on the left, and the closing ceremony at the Learning Commons.',
+  caption:
+    'Check in outside the Administration Building, then head to Room C205 in Building C for the opening ceremony and the contest. Lunch is at the lunch tables; the closing ceremony is in the Learning Commons.',
+} as const;
+
+/** Prefixes a /public path with the deployment's basePath, if any. */
+export const asset = (path: string) => `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}${path}`;
+
 export const rules = [
   'Internet usage is allowed — you may look at helpful resources online.',
   'Pre-written code (templates) are allowed.',
