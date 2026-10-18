@@ -109,7 +109,7 @@ export const notice = {
   headline: 'Check-in has moved to the CCA side entrance',
   /** Phones get the short form; the sticky header has to stay small. */
   headlineShort: 'Check-in: CCA side entrance',
-  detail: 'Not the Administration Building. The map still shows the old spot.',
+  detail: 'The black circle on the map marks the new spot.',
   href: '#map',
   cta: 'See the map',
 } as const;
@@ -123,9 +123,9 @@ export const campusMap = {
   width: 1431,
   height: 818,
   alt:
-    'Canyon Crest Academy campus map, marked up by the organizers. A heavy hand-drawn loop sits over the P2 parking lot at the top with a line running down past Building C. The map also marks the opening ceremony and contest in Building C, lunch at the lunch tables on the left, and the closing ceremony at the Learning Commons on the right. Check-in is at the side entrance, not at the building the map marks.',
+    'Canyon Crest Academy campus map. A heavy black circle near the P2 parking lot at the top marks the side entrance, where check-in now happens, with a line running down past Building C. Red markers show the opening ceremony and contest in Building C, lunch at the lunch tables on the left, the closing ceremony at the Learning Commons on the right, and the old check-in spot at the Administration Building.',
   caption:
-    'Check in at the CCA side entrance — this has moved since the map was drawn, so ignore its check-in marker — then head to Room C205 in Building C for the opening ceremony and the contest. Lunch is at the lunch tables; the closing ceremony is in the Learning Commons.',
+    'Check in at the CCA side entrance, circled in black near the P2 parking lot — the red “check in” marker is the old spot. From there, Room C205 in Building C for the opening ceremony and the contest. Lunch is at the lunch tables; the closing ceremony is in the Learning Commons.',
 } as const;
 
 /** Prefixes a /public path with the deployment's basePath, if any. */
