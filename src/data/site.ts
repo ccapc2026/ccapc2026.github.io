@@ -38,7 +38,7 @@ export const contest = {
   venue: 'Canyon Crest Academy',
   address: '5951 Village Center Loop Road, San Diego, CA 92130',
   /** Check-in is outdoors; the opening ceremony and contest are in C205. */
-  checkIn: 'Outside the Administration Building',
+  checkIn: 'The CCA side entrance',
   room: 'Room C205' as string | null,
 
   discordUrl: 'https://discord.gg/qDF68NdgCS',
@@ -61,7 +61,7 @@ export const tracks = [
     name: 'In person',
     hasDivisions: false,
     blurb: 'One combined division for all in-person teams.',
-    detail: 'At Canyon Crest Academy. Check in outside the Administration Building; the opening ceremony and contest are in Room C205.',
+    detail: 'At Canyon Crest Academy. Check in at the CCA side entrance; the opening ceremony and contest are in Room C205.',
   },
   {
     name: 'Online',
@@ -88,7 +88,7 @@ export const divisions = [
 
 /** Day-of schedule, Pacific Time. Everything but the contest is in person. */
 export const schedule = [
-  { time: '8:30am – 9:00am', event: 'Check in · outside the Administration Building' },
+  { time: '8:30am – 9:00am', event: 'Check in · CCA side entrance' },
   { time: '9:00am – 9:30am', event: 'Opening ceremony · Room C205' },
   { time: '9:30am – 1:00pm', event: 'Contest' },
   { time: '1:00pm – 2:00pm', event: 'Lunch' },
@@ -109,9 +109,9 @@ export const campusMap = {
   width: 1800,
   height: 1017,
   alt:
-    'Canyon Crest Academy campus map. Check-in is marked at the Administration Building on the right, the opening ceremony and contest in Building C at the top, lunch at the lunch tables on the left, and the closing ceremony at the Learning Commons.',
+    'Canyon Crest Academy campus map, marking the opening ceremony and contest in Building C at the top, lunch at the lunch tables on the left, and the closing ceremony at the Learning Commons on the right. Check-in is at the side entrance, not at the building the map marks.',
   caption:
-    'Check in outside the Administration Building, then head to Room C205 in Building C for the opening ceremony and the contest. Lunch is at the lunch tables; the closing ceremony is in the Learning Commons.',
+    'Check in at the CCA side entrance — this has moved since the map was drawn, so ignore its check-in marker — then head to Room C205 in Building C for the opening ceremony and the contest. Lunch is at the lunch tables; the closing ceremony is in the Learning Commons.',
 } as const;
 
 /** Prefixes a /public path with the deployment's basePath, if any. */
