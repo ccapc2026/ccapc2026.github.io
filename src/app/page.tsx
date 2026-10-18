@@ -235,7 +235,7 @@ function Schedule() {
 
         {/* The map is dense, so it opens full size in a new tab for anyone
             reading on a phone. */}
-        <figure className="mt-8 overflow-hidden rounded-xl border border-rule bg-white">
+        <figure id="map" className="mt-8 overflow-hidden rounded-xl border border-rule bg-white">
           <a href={asset(campusMap.src)} target="_blank" rel="noreferrer">
             <Image
               src={campusMap.src}

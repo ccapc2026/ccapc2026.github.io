@@ -101,6 +101,20 @@ export const scheduleNote =
   'The contest itself runs 9:30am – 1:00pm; online teams compete during the same window.';
 
 /**
+ * Day-of notice pinned above the nav. Set `active: false` after the contest
+ * — everything else here outlives the banner.
+ */
+export const notice = {
+  active: true,
+  headline: 'Check-in has moved to the CCA side entrance',
+  /** Phones get the short form; the sticky header has to stay small. */
+  headlineShort: 'Check-in: CCA side entrance',
+  detail: 'Not the Administration Building. The map still shows the old spot.',
+  href: '#map',
+  cta: 'See the map',
+} as const;
+
+/**
  * Campus map from the participant guide. `next/image` prefixes basePath on
  * its own; a plain href to the same file does not, hence `asset()`.
  */

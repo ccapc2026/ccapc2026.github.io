@@ -1,13 +1,32 @@
 'use client';
 
 import { useState } from 'react';
-import { contest, navLinks, site } from '@/data/site';
+import { contest, navLinks, notice, site } from '@/data/site';
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-30 bg-cca-deep text-white">
+      {/* Day-of notice rides inside the sticky header so it cannot be
+          scrolled past — amber because the red band is the site's own colour
+          and would read as decoration. */}
+      {notice.active && (
+        <div className="bg-amber-300 text-ink">
+          <a href={notice.href} className="wrap flex flex-wrap items-center gap-x-3 gap-y-1 py-3">
+            <span className="rounded bg-ink px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-amber-300">
+              Update
+            </span>
+            <span className="text-base font-bold sm:hidden">{notice.headlineShort}</span>
+            <span className="hidden text-base font-bold sm:inline sm:text-lg">{notice.headline}</span>
+            <span className="hidden text-sm text-ink/75 sm:inline">{notice.detail}</span>
+            <span className="text-sm font-semibold underline underline-offset-4">
+              {notice.cta} →
+            </span>
+          </a>
+        </div>
+      )}
+
       <div className="wrap flex min-h-12 flex-wrap items-center gap-x-6 gap-y-2 py-2">
         <a href="#top" className="mr-auto text-sm font-bold tracking-tight">
           {site.title}

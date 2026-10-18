@@ -19,8 +19,9 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Clear the sticky nav when an anchor is jumped to. */
-    scroll-padding-top: 4rem;
+    /* Clear the sticky header when an anchor is jumped to. Tracks the
+       header's real height, which grows while the notice banner is up. */
+    scroll-padding-top: 8.5rem;
   }
 
   body {
