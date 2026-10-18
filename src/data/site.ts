@@ -106,10 +106,10 @@ export const scheduleNote =
  */
 export const campusMap = {
   src: '/cca-campus-map.webp',
-  width: 1800,
-  height: 1017,
+  width: 1431,
+  height: 818,
   alt:
-    'Canyon Crest Academy campus map, marking the opening ceremony and contest in Building C at the top, lunch at the lunch tables on the left, and the closing ceremony at the Learning Commons on the right. Check-in is at the side entrance, not at the building the map marks.',
+    'Canyon Crest Academy campus map, marked up by the organizers. A heavy hand-drawn loop sits over the P2 parking lot at the top with a line running down past Building C. The map also marks the opening ceremony and contest in Building C, lunch at the lunch tables on the left, and the closing ceremony at the Learning Commons on the right. Check-in is at the side entrance, not at the building the map marks.',
   caption:
     'Check in at the CCA side entrance — this has moved since the map was drawn, so ignore its check-in marker — then head to Room C205 in Building C for the opening ceremony and the contest. Lunch is at the lunch tables; the closing ceremony is in the Learning Commons.',
 } as const;
